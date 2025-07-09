@@ -191,7 +191,7 @@ uni.onNativeEventReceive((event, data) => {
 * 建议使用automation/proxy-api管理移动网关
 * author: xujiale
 
-### git提交规格
+### git提交规范
 | 类型 | 说明 |
 | -------- | -------- |
 | feat | 新增功能（feature） |
