@@ -39,12 +39,12 @@ uni-lite-framework
 ```
 [官方目录结构](https://uniapp.dcloud.net.cn/tutorial/project.html)
 
-### 什么是开发环境和生成环境？
+### 什么是开发环境和生产环境？
 HBuilderX中, 点击"运行"编译出来的代码是开发环境, 点击"发行"编译出来的代码是生产环境。并不是配置文件配置dev就是测试环境，配置pro就是生产环境，这里概念是错误的！另外在我们开发时，在区分接口地址、获取身份信息、是否接受app用于注入host，应单独增加配置项控制，而不是单单靠环境变量来区分，试一个场景：本地安装原生开发的基座，本地启动，难到就不可以接受app基座注入的信息么？
 
 ```
 process.env.NODE_ENV == 'development'     是开发环境
-process.env.NODE_ENV == 'production'    是生成环境
+process.env.NODE_ENV == 'production'    是生产环境
 ```
 上边NODE_ENV是环境变量，无需手动设置。我们只需要记住`点击"运行"编译出来的代码是开发环境, 点击"发行"编译出来的代码是生产环境`
 [开发环境和生产环境](https://uniapp.dcloud.net.cn/worktile/running-env.html)
