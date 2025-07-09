@@ -1,0 +1,15 @@
+{
+	"name": "mobile-vue3-package",
+	"version": "1.0.0",
+	"description": "",
+	"main": "main.js",
+	"scripts": {
+		"gateway:add": "node ./automation/proxy-api/index.js executeAddTask",
+		"gateway:edit": "node ./automation/proxy-api/index.js executeEditTask",
+		"gateway:del": "node ./automation/proxy-api/index.js executeDelTask",
+		"gateway:create": "node ./automation/proxy-api/index.js createAddMjs",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "xujiale",
+	"license": "ISC"
+}
