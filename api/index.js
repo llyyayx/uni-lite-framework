@@ -21,9 +21,10 @@ export default {
 		 * @param { Object } obj.header? http header
 		 * @param { Boolean } obj.oldFormat? 是否采用老版传参 [默认false]
 		 * @param { String } obj.responseType? 响应的数据类型[text/arraybuffer, 默认text]
+		 * @param { Boolean } obj.formData? 是否代理传输formData格式参数 [默认false, oldFormat为true时生效]
 		 */
 		pack(obj) {
-			const { task, serveKey, data, header, oldFormat, responseType } = obj
+			const { task, serveKey, data, header, oldFormat, responseType, formData } = obj
 			return {
 				serveKey: serveKey || config.serveKey,
 				apiId: task.apiId,
@@ -31,6 +32,7 @@ export default {
 				header,
 				oldFormat,
 				responseType,
+				formData
 			}
 		},
 		/**

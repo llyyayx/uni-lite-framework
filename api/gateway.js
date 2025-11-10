@@ -10,11 +10,13 @@ import { request } from './request'
  * @param { Object } obj.header? http header
  * @param { Boolean } obj.oldFormat? 是否采用老版传参 [默认false]
  * @param { String } obj.responseType? 响应的数据类型 [text/arraybuffer, 默认text]
+ * @param { Boolean } obj.formData? 是否代理传输formData格式参数 [默认false, oldFormat为true时生效]
  * @returns { Object } 请求结果
 */
 export const gatewayRequest = (obj) => {
 	const serveKey = obj.serveKey || config.serveKey
 	const oldFormat = obj.oldFormat !== true ? false : true
+	obj.formData = obj.formData == undefined ? false : obj.formData
 	return new Promise((resolve, reject) => {
 		// 最新移动中台传参格式
 		let data = {
@@ -29,12 +31,13 @@ export const gatewayRequest = (obj) => {
 		// 兼容老版传参格式
 		if (oldFormat) {
 			data = {
-				body: obj.data,
+				appCode: config.appCode,
+				apiId: obj.apiId,
 				apiHeader: [{
 					headerKey: 'Authorization',
 					value: uni.getStorageSync('userInfo').token
 				}],
-				apiId: obj.apiId
+				body: obj.data
 			}
 			if (obj.header && typeof obj.header === 'object') {
 				Object.keys(obj.header).forEach(key => {
@@ -43,6 +46,9 @@ export const gatewayRequest = (obj) => {
 						value: obj.header[key]
 					})
 				})
+			}
+			if (obj.formData) {
+				data.contentType = 1
 			}
 		}
 		request({
