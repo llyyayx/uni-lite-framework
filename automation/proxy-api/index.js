@@ -49,6 +49,10 @@ const executeAddTask = async () => {
 			}), config.port, config.protocol)
 			const createObj = JSON.parse(createJson)
 			if (createObj.status != 0) {
+				// 已添加过的置为完成状态
+				if (createObj.status == -1 && createObj.msg == '该API已定义') {
+					addTask[i]['done'] = true
+				}
 				addTaskLog.push({
 					apiId: addTask[i]['apiId'],
 					apiName: addTask[i]['apiName'],
