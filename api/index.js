@@ -2,7 +2,7 @@ import config from '/config/index'
 // 普通请求
 import { request, uploadFile } from '/api/request'
 // 移动网关代理请求
-import { gatewayRequest } from '/api/gateway'
+import { gatewayRequest, gatewayUploadFile } from '/api/gateway'
 
 /**
  * @module 请求驱动
@@ -43,6 +43,36 @@ export default {
 			return gatewayRequest(params)
 		}
 	},
+	gatewayUploadFile: {
+		/**
+		 * @desc 文件上传包装请求参数
+		 * @param { Object } task automation/proxy-api/add.js的数据格式
+		 * 					@param { String } task.apiUrl 接口url 
+		 * @param { String } serveKey? 服务名称, 默认取配置文件的(就是使用哪个后台服务地址)
+		 * @param { String } filePath 要上传文件资源的路径
+		 * @param { String } name? 文件对应的key,默认file
+		 * @param { Object } data? formData里额外的数据,默认{}
+		 * @param { Object } obj.header? http header
+		 */
+		pack(obj) {
+			const { task, serveKey, filePath, name, data, header } = obj
+			return {
+				serveKey: serveKey || config.serveKey,
+				apiId: task.apiId,
+				filePath,
+				name,
+				data,
+				header
+			}
+		},
+		/**
+		 * @desc 文件上传
+		 * @param { Object } params 使用pack方法生成的参数
+		 */
+		run(params) {
+			return gatewayUploadFile(params)
+		}
+	},
 	request: {
 		/**
 		 * @desc 包装请求参数
@@ -81,17 +111,17 @@ export default {
 	    * @param { String } serveKey? 服务名称, 默认取配置文件的(就是使用哪个后台服务地址)
 	    * @param { String } filePath 要上传文件资源的路径
 		* @param { String } name? 文件对应的key,默认file
-		* @param { Object } formData? 额外的数据,默认{}
+		* @param { Object } data? formData里额外的数据,默认{}
 		* @param { Object } obj.header? http header
 	    */
 		pack(obj) {
-			const { task, serveKey, filePath, name, formData, header } = obj
+			const { task, serveKey, filePath, name, data, header } = obj
 			return {
 				serveKey: serveKey || config.serveKey,
 				url: task.apiUrl,
 				filePath,
 				name,
-				formData,
+				formData: data || {},
 				header
 			}
 		},

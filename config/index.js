@@ -11,11 +11,14 @@ export default {
 			host: 'https://madp.sgai.cn',
 			// 请求前缀
 			baseUrl: '/madp-app/msGw/apiDefine/callApiUnauth',
+			// 上传文件前缀
+			upLoadBaseUrl: '/madp-app/msGw/apiDefine/upload'
 		},
 		lwlims: {
 			name: 'limis后台服务地址',
 			host: 'http://10.168.114.160:31043',
 			baseUrl: '/iiot-lwlims-app',
+			upLoadBaseUrl: ''
 		}
 	},
 	// [HBuilderX中NODE_ENV, 点击"运行"编译出来的代码是开发环境, 点击"发行"编译出来的代码是生产环境]

@@ -9,6 +9,7 @@ import reqDrive from '/api/index'
 
 // 获取请求驱动
 const publicRequest = reqDrive[config.reqDrive]
+const upLoadRequest = reqDrive.gatewayUploadFile
 
 // 当前模块的api任务列表
 // 方式一: 从自动化添加处获取(推荐)
@@ -35,4 +36,13 @@ export default {
 			data: data
 		}))
 	}
+	// 示例: 上传文件
+	export const upload = (obj) => {
+		return upLoadRequest.run(upLoadRequest.pack({
+			task: findTask(allTask, 'tq.lims.upload'),
+			filePath: obj.filePath,
+			data: obj.data
+		})).then(res => res.data.data_0)
+	}
+	
 }

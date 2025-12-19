@@ -76,14 +76,16 @@ export const request = (obj) => {
  * @param { String } obj.url 上传文件地址
  * @param { String } obj.filePath 要上传文件资源的路径
  * @param { String } obj.name? 文件对应的key,默认file
- * @param { Object } obj.formData? 额外的数据,默认{}
+ * @param { Object } obj.formData? formData里额外的数据,默认{}
  * @param { Object } obj.header? http header
+ * @param { String } obj.serveKey? 服务名称 [默认取配置文件内的]
  * @returns { Object } 上传结果
 */
 export const uploadFile = (obj) => {
+	const serveKey = obj.serveKey || config.serveKey
 	return new Promise((resolve, reject) => {
 		uni.uploadFile({
-			url: obj.url,
+			url: config.serve[serveKey]['host'] + config.serve[serveKey]['upLoadBaseUrl'] + obj.url,
 			header: {
 				'Authorization': uni.getStorageSync('userInfo').token,
 				...obj.header
@@ -92,7 +94,7 @@ export const uploadFile = (obj) => {
 			name: obj.name || 'file',
 			formData: obj.formData || {},
 			success(res) {
-				const contentType = res['header']['content-type'] || ''
+				const contentType = res['header'] ? res['header']['content-type'] : ''
 				if (isStream(contentType)) {
 					// 流式返回
 					resolve(res.data)
@@ -133,4 +135,14 @@ export const uploadFile = (obj) => {
 			}
 		})
 	})
+}
+
+// 判断数据是不是json格式
+const isJSON = (str) => {
+    try {
+		JSON.parse(str)
+        return true
+    } catch (e) {
+        return false;
+    }
 }

@@ -1,5 +1,5 @@
 import config from '/config/index'
-import { request } from './request'
+import { request, uploadFile } from './request'
 
 /**
  * @desc 使用移动中台/移动网关代理请求
@@ -59,6 +59,45 @@ export const gatewayRequest = (obj) => {
 			data: data,
 			method: 'POST',
 			gateway: true
+		}).then(e => {
+			resolve(e)
+		}).catch(err => {
+			reject(err)
+		})
+	})
+}
+
+/**
+ * @desc 使用移动中台/移动网关代理上传文件
+ * @author xujiale
+ * @param { String } obj.filePath 要上传文件资源的路径
+ * @param { String } obj.apiId 移动网关operationType
+ * @param { String } obj.name? 文件对应的key,默认file
+ * @param { String } obj.data? formData里额外的数据,默认{}
+ * @param { String } obj.serveKey? 服务名称 [默认取配置文件内的]
+ * @param { Object } obj.header? http header
+ * @returns { Object } 请求结果
+*/
+export const gatewayUploadFile = (obj) => {
+	const serveKey = obj.serveKey || config.serveKey
+	// 组装移动中台上传所需的参数格式
+	const params = JSON.stringify({
+		appCode: config.appCode,
+		apiId: obj.apiId,
+		headers: {
+			Authorization: uni.getStorageSync('userInfo').token,
+			...obj.header
+		},
+		body: obj.data || {}
+	})
+	return new Promise((resolve, reject) => {
+		uploadFile({
+			serveKey,
+			// 移动网关代理api url配置在config->serve.servekey.upLoadBaseUrl, 所以这里置空就可以
+			url: '',
+			filePath: obj.filePath,
+			name: obj.name || 'file',
+			formData: { params },
 		}).then(e => {
 			resolve(e)
 		}).catch(err => {
