@@ -98,6 +98,7 @@ export const gatewayUploadFile = (obj) => {
 			filePath: obj.filePath,
 			name: obj.name || 'file',
 			formData: { params },
+			gateway: true
 		}).then(e => {
 			resolve(e)
 		}).catch(err => {

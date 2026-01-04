@@ -154,6 +154,9 @@ export const showTips = (content, cancel = true, success, fail) => {
 
 // 判断是否是流返回
 export const isStream = (contentType) => {
+	if (contentType == undefined || contentType == null) {
+		return false
+	}
 	return 	contentType.includes('image/png') || 
 			contentType.includes('image/jpeg') || 
 			contentType.includes('image/jpg') || 

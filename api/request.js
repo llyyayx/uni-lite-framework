@@ -27,7 +27,15 @@ export const request = (obj) => {
 			method: obj.method || 'GET',
 			data: obj.data || '',
 			success: function (res) {
-				const contentType = res['header']['content-type'] || ''
+				let contentType = ''
+				// 处理多端的不同情况
+				if (res['header']) {
+					if (res['header']['Content-Type']) {
+						contentType = res['header']['Content-Type']
+					} else if (res['header']['content-type']) {
+						contentType = res['header']['content-type']
+					}
+				}
 				if (isStream(contentType)) {
 					// 流式返回
 					resolve(res.data)
@@ -79,6 +87,7 @@ export const request = (obj) => {
  * @param { Object } obj.formData? formData里额外的数据,默认{}
  * @param { Object } obj.header? http header
  * @param { String } obj.serveKey? 服务名称 [默认取配置文件内的]
+ * @param { Boolean } obj.gateway? 是否是移动网关代理访问 [默认false]
  * @returns { Object } 上传结果
 */
 export const uploadFile = (obj) => {
@@ -94,7 +103,15 @@ export const uploadFile = (obj) => {
 			name: obj.name || 'file',
 			formData: obj.formData || {},
 			success(res) {
-				const contentType = res['header'] ? res['header']['content-type'] : ''
+				let contentType = ''
+				// 处理多端的不同情况
+				if (res['header']) {
+					if (res['header']['Content-Type']) {
+						contentType = res['header']['Content-Type']
+					} else if (res['header']['content-type']) {
+						contentType = res['header']['content-type']
+					}
+				}
 				if (isStream(contentType)) {
 					// 流式返回
 					resolve(res.data)
