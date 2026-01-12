@@ -93,6 +93,12 @@ const goHome = () => {
 </script>
 
 <style lang="scss" scoped>
+.custom__navbar {
+	height: 88rpx;
+	:deep(.uv-navbar--fixed) {
+		z-index: 99999;
+	}
+}
 .custom__navbar-slot {
 	display: flex;
 	align-items: center;
