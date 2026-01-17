@@ -123,7 +123,7 @@ const executeAddTask = async () => {
 		}
 	}
 	console.log('添加任务执行完成,日志如下:\r\n')
-	console.log(addTaskLog)
+	addTaskLog.forEach(item => { console.log(item) })
 	writeFile(addTask, 'add.js')
 }
 
@@ -195,7 +195,7 @@ const executeEditTask = async () => {
 		}
 	}
 	console.log('修改任务执行完成,日志如下:\r\n')
-	console.log(editTaskLog)
+	editTaskLog.forEach(item => { console.log(item) })
 }
 
 // 执行删除任务
@@ -261,7 +261,7 @@ const executeDelTask = async () => {
 		}
 	}
 	console.log('删除任务执行完成,日志如下:\r\n')
-	console.log(delTaskLog)
+	delTaskLog.forEach(item => { console.log(item) })
 	writeFile(addTask, 'add.js')
 }
 
