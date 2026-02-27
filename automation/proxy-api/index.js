@@ -87,7 +87,7 @@ const executeAddTask = async () => {
 					data_0: {
 						apiId: addTask[i]['apiId'],
 						apiName: addTask[i]['apiName'],
-						groupId: config.groupId,
+						groupId: addTask[i]['groupId'] != undefined ? addTask[i]['groupId'] : config.groupId,
 						path: addTask[i]['apiUrl'],
 						qequestMethod: addTask[i]['method'] ? addTask[i]['method'].toUpperCase() : 'POST',
 						requestType: '0',
@@ -160,7 +160,7 @@ const executeEditTask = async () => {
 					data_0: {
 						apiId: editTask[i]['apiId'],
 						apiName: editTask[i]['afterApiName'],
-						groupId: config.groupId,
+						groupId: editTask[i]['afterGroupId'] != undefined ? editTask[i]['afterGroupId'] : config.groupId,
 						path: editTask[i]['afterApiUrl'],
 						qequestMethod: editTask[i]['afterMethod'] ? editTask[i]['afterMethod'].toUpperCase() : 'POST',
 						requestType: '0',

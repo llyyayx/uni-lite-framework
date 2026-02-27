@@ -6,6 +6,7 @@
  * @param { String } apiName 接口名称
  * @param { String } method 请求类型
  * @param { String } apiUrl 接口url
+ * @param { String } groupId? 移动网关分组名称-选填
  * @param { String } describe? 接口描述-选填
  * @param { Boolean } done? 是否添加完成-选填
  * @tip apiId已存在的会默认跳过,无需担心二次执行重复添加的问题

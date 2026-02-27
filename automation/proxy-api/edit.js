@@ -6,6 +6,7 @@
  * @param { String } afterApiName 修改后的接口名称
  * @param { String } afterMethod 修改后的请求类型
  * @param { String } afterApiUrl 修改后的接口url
+ * @param { String } afterGroupId? 修改后的移动网关分组名称-选填
  * @param { String } afterDescribe? 修改后的接口描述-选填
  */
 module.exports = [

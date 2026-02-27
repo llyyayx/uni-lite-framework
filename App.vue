@@ -46,15 +46,17 @@ export default {
 				uni.sendNativeEvent('nfc', {flag: 1})
 			// #endif
 		}
-		uni.onNativeEventReceive((event, data) => {
-			// 页面生命周期内使用: uni.$on('scanInputResult', () => {})
-			if (event == 'scanInputResult') {
-				uni.$emit('scanInputResult', data)
-			}
-			if (event == 'nfcData') {
-				uni.$emit('nfcData', data)
-			}
-		})
+		// #ifdef APP
+			uni.onNativeEventReceive((event, data) => {
+				// 页面生命周期内使用: uni.$on('scanInputResult', () => {})
+				if (event == 'scanInputResult') {
+					uni.$emit('scanInputResult', data)
+				}
+				if (event == 'nfcData') {
+					uni.$emit('nfcData', data)
+				}
+			})
+		// #endif
 	},
 	// 启动或从后台进入前台显示
 	onShow: function() {},
