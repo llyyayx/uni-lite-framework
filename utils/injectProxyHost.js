@@ -10,7 +10,18 @@ export default function () {
 		const injectKeys = config.injectKeys
 		if (injectKeys) {
 			// #ifdef APP-PLUS
-				let infoData = JSON.parse(plus.runtime.arguments)
+				let infoData = null
+				// 兼容鸿蒙
+				let launchParams = uni.getLaunchOptionsSync()
+				if (launchParams && launchParams.referrerInfo && launchParams.referrerInfo.extraData) {
+					const extraData = launchParams.referrerInfo.extraData
+					const keys = Object.keys(extraData) || []
+					if (keys.length > 0) {
+						infoData = extraData
+					}
+				}
+				// android与ios
+				if (infoData == null) { infoData = JSON.parse(plus.runtime.arguments) }
 			// #endif
 			// #ifdef H5
 				const params = new URLSearchParams(window.location.href.split('?')[1])

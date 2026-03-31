@@ -1,0 +1,68 @@
+@import '../font/font.scss';
+
+/* 主题色 */
+$lite-theme: #1890FF;
+
+/* 默认背景色 */
+$lite-bg-color: #F3F4F6;
+/* 默认边线色 */
+$lite-border-color: #E6E6E6;
+
+/* 文字默认颜色 */
+$lite-font-color: #333333;
+/* 文字常规颜色 */
+$lite-font-routine-color: #666666;
+/* 文字默认大小 */
+$lite-font-size: 30rpx;
+/* 状态类文字默认大小 */
+$lite-status-font-size: 24rpx;
+/* 文字默认行高 */
+$lite-font-line-height: 1.46;
+/* 文字默认字体 */
+$lite-font-family: PingFang-SC-Regular, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Segoe UI, Arial, Roboto, "PingFang SC", "miui", "Hiragino Sans GB", "Microsoft Yahei", sans-serif;
+
+/* 默认边距 */
+$lite-margin: 30rpx;
+
+/* 主色 */
+$lite-primary: $lite-theme;
+/* 警告色 */
+$lite-warning: #FF9900;
+/* 成功色 */
+$lite-success: #2CC167;
+/* 错误色 */
+$lite-error: #FA3434;
+/* 信息色 */
+$lite-info: #32C5FF;
+
+/* 默认圆角 */
+$lite-border-radius: 10rpx;
+/* 小圆角 */
+$lite-border-radius-sm: 4rpx;
+
+/* 复选框圆角 */
+$lite-checkbox-border-radius: 4rpx;
+/* 复选框边框颜色 */
+$lite-checkbox-border-color: #CDD7E3;
+/* 复选框未选中时颜色 */
+$lite-checkbox-color: #E7EEF7;
+/* 复选框选中时颜色 */
+$lite-checkbox-active-color: $lite-theme;
+
+/* 卡片背景色 */
+$lite-card-bg-color: #FFFFFF;
+/* 卡片默认边线色 */
+$lite-card-border-color: $lite-border-color;
+/* 卡片标题字号 */
+$lite-card-font-size: $lite-font-size;
+/* 卡片文字颜色 */
+$lite-card-font-color: $lite-font-color;
+/* 卡片label文字颜色 */
+$lite-card-label-font-color: $lite-font-routine-color;
+
+/* 按钮颜色 */
+$lite-button-primary: $lite-primary;
+$lite-button-success: $lite-success;
+$lite-button-error: $lite-error;
+$lite-button-warning: $lite-warning;
+$lite-button-info: $lite-info;

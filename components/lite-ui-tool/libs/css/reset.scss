@@ -1,0 +1,15 @@
+@import './variable.scss';
+
+page {
+	font-size: $lite-font-size;
+	line-height: $lite-font-line-height;
+	height: 100%;
+	background-color: $lite-bg-color;
+	color: $lite-font-color;
+	/* css变量 */
+	--basic-font-size: #{$lite-font-size};
+	--theme: #{$lite-theme};
+	--custom-navbar-height: calc(44px + var(--status-bar-height));
+	--btn-radius: 10rpx;
+	font-family: $lite-font-family;
+}

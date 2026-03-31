@@ -12,7 +12,18 @@ export const injectUserInfo = () => {
 		let infoData = { data }
 	// #endif
 	// #ifndef H5
-		let infoData = JSON.parse(plus.runtime.arguments)
+		let infoData = null
+		// 兼容鸿蒙
+		let launchParams = uni.getLaunchOptionsSync()
+		if (launchParams && launchParams.referrerInfo && launchParams.referrerInfo.extraData) {
+			const extraData = launchParams.referrerInfo.extraData
+			const keys = Object.keys(extraData) || []
+			if (keys.length > 0) {
+				infoData = extraData
+			}
+		}
+		// android与ios
+		if (infoData == null) { infoData = JSON.parse(plus.runtime.arguments) }
 	// #endif
 	if (infoData) {
 		uni.setStorageSync('userInfo', infoData.data)

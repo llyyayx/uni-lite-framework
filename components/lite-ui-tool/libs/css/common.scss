@@ -1,0 +1,184 @@
+@import './variable.scss';
+
+/* 超出行数，自动显示行尾省略号，最多5行 */
+@mixin lite-mixin-line($i) {
+	/* #ifdef APP-NVUE */
+	lines: $i;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	flex: 1;
+	/* #endif */
+	/* #ifndef APP-NVUE */
+	@if $i == '1' {
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+	} @else {
+		display: -webkit-box!important;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		word-break: break-all;
+		-webkit-line-clamp: $i;
+		-webkit-box-orient: vertical!important;
+	}
+	/* #endif */
+}
+
+/* 面板表单公共样式 */
+@mixin panel-from {
+	.lite__form {
+		:deep(.uv-form) {
+			.uv-form-item {
+				.uv-form-item__body {
+					.uv-form-item__body__left {
+						.uv-form-item__body__left__content__label {
+							font-size: 30rpx;
+							color: #666666;
+							font-weight: normal;
+						}
+					}
+					.uv-form-item__body__right {
+						.uv-input {
+							background-color: #F7F7F8 !important;
+							border-color: #CCCCCC !important;
+							border-radius: 4rpx;
+							.uv-input__content__field-wrapper__field {
+								font-size: 30rpx !important;
+							}
+							.uv-input__content {
+								height: 56rpx;
+								line-height: 56rpx;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+/* 上块固定，下块滚动 */
+@mixin fix-scroll {
+	display: flex;
+	flex-direction: column;
+	.lite__fix {
+		flex-shrink: 0;
+		flex-grow: 0;
+	}
+	.lite__scroll {
+		flex-shrink: 1;
+		flex-grow: 1;
+		overflow-y: auto;
+		&::-webkit-scrollbar {
+			width: 0px;
+		}
+	}
+}
+.lite__compose {
+	height: 100%;
+	@include fix-scroll;
+}
+
+/* 复选框统一样式 */
+.lite__checkbox {
+	:deep(.uv-checkbox-group) {
+		.uv-checkbox__icon-wrap  {
+			background-color: $lite-checkbox-color !important;
+			border-radius: $lite-checkbox-border-radius !important;
+			border-color: $lite-checkbox-border-color !important;
+		}
+	}
+}
+.lite__checkbox-active {
+	:deep(.uv-checkbox-group) {
+		.uv-checkbox__icon-wrap  {
+			background-color: $lite-checkbox-active-color !important;
+			border-radius: $lite-checkbox-border-radius !important;
+			border-color: $lite-checkbox-active-color !important;
+		}
+	}
+}
+
+/* 库垛数量展示 */
+.lite__stock__info {
+	display: flex;
+	align-items: center;
+	margin: 0 $lite-margin;
+	padding: $lite-margin 0;
+	border-bottom: 2rpx solid #F3F4F6;
+	.info__item {
+		width: max-content;
+		max-width: 38%;
+		flex-shrink: 1;
+		flex-grow: 0;
+		display: flex;
+		align-items: center;
+		padding-right: 28rpx;
+		margin-right: 28rpx;
+		line-height: 40rpx;
+		border-right: 2rpx solid #E6E6E6;
+		&:nth-last-child(1) {
+			padding-right: 0;
+			margin-right: 0;
+			border-right: none;
+		}
+		.label {
+			flex-shrink: 0;
+			flex-grow: 0;
+			font-size: $lite-font-size;
+			color: $lite-font-routine-color;
+			margin-right: 8rpx;
+		}
+		.value {
+			flex-shrink: 1;
+			flex-grow: 1;
+			font-size: $lite-font-size;
+			color: $lite-font-color;
+			@include lite-mixin-line(1);
+		}
+	}
+}
+
+/* 一般信息展示 */
+.lite__general__info {
+	display: flex;
+	align-items: center;
+	margin: 0 $lite-margin;
+	padding: $lite-margin 0;
+	border-bottom: 2rpx solid #F3F4F6;
+	.general__item {
+		width: 0;
+		flex-shrink: 1;
+		flex-grow: 1;
+		display: flex;
+		align-items: center;
+		padding-right: 28rpx;
+		margin-right: 28rpx;
+		line-height: 40rpx;
+		border-right: 2rpx solid #E6E6E6;
+		&:nth-last-child(1) {
+			padding-right: 0;
+			margin-right: 0;
+			border-right: none;
+		}
+		.label {
+			flex-shrink: 0;
+			flex-grow: 0;
+			font-size: $lite-font-size;
+			color: $lite-font-routine-color;
+			margin-right: 8rpx;
+		}
+		.value {
+			flex-shrink: 1;
+			flex-grow: 1;
+			font-size: $lite-font-size;
+			color: $lite-font-color;
+			@include lite-mixin-line(1);
+		}
+	}
+}
+
+/* 白色背景盒子 */
+.lite__white__box {
+	background-color: #FFFFFF;
+}
