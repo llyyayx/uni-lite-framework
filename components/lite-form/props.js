@@ -14,7 +14,7 @@ export default {
 		rules: {
 			type: Object,
 			required: false,
-			default: {}
+			default: () => ({})
 		},
 		// label文件位置[left、top]
 		labelPosition: {

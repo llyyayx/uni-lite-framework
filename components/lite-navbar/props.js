@@ -46,7 +46,7 @@ export default {
 		searchRef: {
 			type: Object,
 			required: false,
-			default: () => {}
+			default: () => ({})
 		},
 		// 显示右侧搜索按钮
 		showSearch: {
